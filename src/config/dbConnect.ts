@@ -1,5 +1,4 @@
 import { Sequelize } from "sequelize";
-import pg from "pg";
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -9,10 +8,14 @@ const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME as string;
 const dbHost = process.env.DB_HOST;
 
-const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+const sequelize = new Sequelize({
+  database: dbName,
+  username: dbUser,
+  password: dbPassword,
   host: dbHost,
   dialect: "postgres",
-  dialectModule: pg,
+  dialectModule: require("pg"),
+  benchmark: true,
 });
 
 export default sequelize;
