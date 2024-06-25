@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import pg from "pg";
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -11,7 +12,7 @@ const dbHost = process.env.DB_HOST;
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   host: dbHost,
   dialect: "postgres",
-  dialectModule: require("pg"),
+  dialectModule: pg,
 });
 
 export default sequelize;
