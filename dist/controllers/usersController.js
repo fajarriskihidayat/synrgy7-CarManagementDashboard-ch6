@@ -17,7 +17,7 @@ const userServise_1 = __importDefault(require("../services/userServise"));
 const checkPassword_1 = require("../utils/checkPassword");
 const createToken_1 = require("../utils/createToken");
 const jwt = require("jsonwebtoken");
-const encryptPassword = require("../utils/encryptPassword.ts");
+const encryptPassword = require("../utils/encryptPassword");
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const payload = req.body;
     if (!payload.name || !payload.email || !payload.password) {

@@ -4,7 +4,7 @@ import { checkPassword } from "../utils/checkPassword";
 import { createToken } from "../utils/createToken";
 
 const jwt = require("jsonwebtoken");
-const encryptPassword = require("../utils/encryptPassword.ts");
+const encryptPassword = require("../utils/encryptPassword");
 
 export const register = async (req: Request, res: Response) => {
   const payload = req.body;
