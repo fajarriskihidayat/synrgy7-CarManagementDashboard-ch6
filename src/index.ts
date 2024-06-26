@@ -1,7 +1,10 @@
 import express from "express";
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const PORT = 8000;
+const dotenv = require("dotenv");
+dotenv.config();
+
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 
