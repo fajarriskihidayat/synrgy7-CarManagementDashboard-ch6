@@ -61,6 +61,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         maxAge: 24 * 60 * 60 * 1000, // 1 day
         domain: process.env.CLIENT_URL,
         path: "/",
+        sameSite: "none",
     });
     return res.status(200).json({
         message: "Login success",
@@ -86,13 +87,13 @@ const loginSuperAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function
     const accessToken = (0, createToken_1.createToken)(user, process.env.ACCESS_TOKEN_SECRET, "15s");
     const refreshToken = (0, createToken_1.createToken)(user, process.env.REFRESH_TOKEN_SECRET, "1d");
     yield new userServise_1.default().updateToken(user.id, refreshToken);
-    localStorage.setItem("token", accessToken);
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: true,
         maxAge: 24 * 60 * 60 * 1000, // 1 day
         domain: process.env.CLIENT_URL,
         path: "/",
+        sameSite: "none",
     });
     return res.status(200).json({
         message: "Login success",
