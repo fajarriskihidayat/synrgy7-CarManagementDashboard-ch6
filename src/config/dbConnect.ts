@@ -7,9 +7,11 @@ const dbUser = process.env.POSTGRES_USER as string;
 const dbPassword = process.env.POSTGRES_PASSWORD;
 const dbName = process.env.POSTGRES_DATABASE as string;
 const dbHost = process.env.POSTGRES_HOST;
+const dbPort = process.env.POSTGRES_PORT as number | undefined;
 
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   host: dbHost,
+  port: dbPort,
   dialect: "postgres",
   dialectModule: require("pg"),
 });
