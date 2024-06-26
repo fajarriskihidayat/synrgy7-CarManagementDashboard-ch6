@@ -6,7 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const PORT = 8000;
+const dotenv = require("dotenv");
+dotenv.config();
+const PORT = process.env.PORT;
 const app = (0, express_1.default)();
 const rootRoute = require("./routes");
 app.use(cors({

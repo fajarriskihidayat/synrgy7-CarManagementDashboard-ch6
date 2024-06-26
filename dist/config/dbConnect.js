@@ -3,16 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const dotenv = require("dotenv");
 dotenv.config();
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASSWORD;
-const dbName = process.env.DB_NAME;
-const dbHost = process.env.DB_HOST;
-const dbPort = process.env.DB_PORT;
+const dbUser = process.env.POSTGRES_USER;
+const dbPassword = process.env.POSTGRES_PASSWORD;
+const dbName = process.env.POSTGRES_DATABASE;
+const dbHost = process.env.POSTGRES_HOST;
+const dbPort = process.env.PORT;
 const sequelize = new sequelize_1.Sequelize(dbName, dbUser, dbPassword, {
     host: dbHost,
+    port: dbPort,
     dialect: "postgres",
     dialectModule: require("pg"),
-    port: 5432,
-    benchmark: true,
 });
 exports.default = sequelize;
