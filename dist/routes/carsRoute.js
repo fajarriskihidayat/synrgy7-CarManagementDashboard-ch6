@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const carsController_1 = require("../controllers/carsController");
+const router = (0, express_1.Router)();
+const upload = require("../middleware/upload");
+const isAdminOrSuperAdmin = require("../middleware/isAdminOrSuperAdmin");
+router.get("/", carsController_1.getCars);
+router.use(isAdminOrSuperAdmin);
+router.get("/:id", carsController_1.getCarsById);
+router.post("/", upload.single("picture"), carsController_1.createCar);
+router.put("/:id", upload.single("picture"), carsController_1.updateCar);
+router.delete("/:id", upload.single("picture"), carsController_1.deleteCar);
+module.exports = router;
