@@ -10,19 +10,7 @@ const app = express();
 
 const rootRoute = require("./routes");
 
-type CorsOriginCallback = (
-  origin: string | undefined,
-  callback: (err: Error | null, allow?: boolean) => void
-) => void;
-app.use(
-  cors({
-    credentials: true,
-    origin: ((origin, callback) => {
-      callback(null, true);
-    }) as CorsOriginCallback,
-  })
-);
-
+app.use(cors({ credentials: true, origin: process.env.CLIENT_URL }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
