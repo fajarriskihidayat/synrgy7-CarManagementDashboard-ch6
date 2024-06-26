@@ -49,7 +49,6 @@ exports.getCarsById = getCarsById;
 const createCar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const payload = req.body;
     const image = req.file;
-    console.log({ payload, image });
     if (!payload.size_id || !payload.name || !payload.rentPerDay) {
         return res.status(400).json({ message: "Data not null" });
     }
