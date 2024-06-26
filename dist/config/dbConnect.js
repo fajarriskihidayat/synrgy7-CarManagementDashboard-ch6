@@ -13,5 +13,10 @@ const sequelize = new sequelize_1.Sequelize(dbName, dbUser, dbPassword, {
     port: dbPort,
     dialect: "postgres",
     dialectModule: require("pg"),
+    dialectOptions: {
+        ssl: {
+            require: true,
+        },
+    },
 });
 exports.default = sequelize;

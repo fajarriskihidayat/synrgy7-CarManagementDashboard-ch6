@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon dist/index.js",
-    "build": "npx tsc",
+    "build": "tsc",
     "migrate:prod": "sequelize db:migrate --env production",
     "seed:prod": "sequelize db:seed:all --env production"
   },
