@@ -17,6 +17,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   dialectOptions: {
     ssl: {
       require: true,
+      rejectUnauthorized: false,
     },
   },
 });
