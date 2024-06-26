@@ -11,7 +11,10 @@ dotenv.config();
 const PORT = process.env.PORT || 8000;
 const app = (0, express_1.default)();
 const rootRoute = require("./routes");
-app.use(cors({ credentials: true, origin: process.env.CLIENT_URL }));
+app.use(cors({
+    credentials: true,
+    origin: [process.env.CLIENT_URL, "http://localhost:8000"],
+}));
 app.use(cookieParser());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
