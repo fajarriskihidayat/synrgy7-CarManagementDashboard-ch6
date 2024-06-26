@@ -60,6 +60,7 @@ export const login = async (req: Request, res: Response) => {
   await new UsersService().updateToken(user.id, refreshToken);
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
+    secure: true,
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   });
 
