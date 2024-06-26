@@ -62,6 +62,8 @@ export const login = async (req: Request, res: Response) => {
     httpOnly: true,
     secure: true,
     maxAge: 24 * 60 * 60 * 1000, // 1 day
+    domain: process.env.CLIENT_URL,
+    path: "/",
   });
 
   return res.status(200).json({
@@ -97,9 +99,13 @@ export const loginSuperAdmin = async (req: Request, res: Response) => {
   );
 
   await new UsersService().updateToken(user.id, refreshToken);
+  localStorage.setItem("token", accessToken);
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
+    secure: true,
     maxAge: 24 * 60 * 60 * 1000, // 1 day
+    domain: process.env.CLIENT_URL,
+    path: "/",
   });
 
   return res.status(200).json({
