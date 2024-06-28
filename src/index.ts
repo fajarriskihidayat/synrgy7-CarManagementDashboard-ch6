@@ -13,7 +13,7 @@ const rootRoute = require("./routes");
 app.use(
   cors({
     credentials: true,
-    origin: [process.env.CLIENT_URL, "http://localhost:8000"],
+    origin: [process.env.CLIENT_URL, "http://localhost:5173"],
   })
 );
 app.use(cookieParser());
