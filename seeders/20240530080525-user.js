@@ -19,7 +19,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 1,
+        id: 2,
         name: "Admin",
         email: "admin@gmail.com",
         password: encryptedAdmin,
