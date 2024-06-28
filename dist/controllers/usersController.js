@@ -59,7 +59,6 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         httpOnly: true,
         secure: true,
         maxAge: 24 * 60 * 60 * 1000, // 1 day
-        domain: process.env.CLIENT_URL,
         path: "/",
         sameSite: "none",
     });
@@ -91,7 +90,6 @@ const loginSuperAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function
         httpOnly: true,
         secure: true,
         maxAge: 24 * 60 * 60 * 1000, // 1 day
-        domain: process.env.CLIENT_URL,
         path: "/",
         sameSite: "none",
     });
