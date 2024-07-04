@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createAdmin,
   getUser,
+  googleAuth,
   login,
   loginSuperAdmin,
   logout,
@@ -19,6 +20,7 @@ router.get("/token", refreshToken);
 router.post("/register", register);
 router.post("/admin/register", isSuperAdmin, createAdmin);
 router.post("/login", login);
+router.post("/googleAuth", googleAuth);
 router.post("/superadmin/login", loginSuperAdmin);
 router.delete("/logout", logout);
 

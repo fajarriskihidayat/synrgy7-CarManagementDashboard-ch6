@@ -16,8 +16,8 @@ export default class UsersService {
     return await this.#usersRepository.getUsers(payload);
   }
 
-  async getByEmail(body: Users) {
-    return await this.#usersRepository.getByEmail(body);
+  async getByEmail(email: string) {
+    return await this.#usersRepository.getByEmail(email);
   }
 
   async updateToken(id: number, payload: string | null) {

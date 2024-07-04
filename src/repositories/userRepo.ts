@@ -10,9 +10,9 @@ export default class usersRepository {
     return await Users.findAll({ where: { refresh_token: payload } });
   }
 
-  async getByEmail(body: Users) {
+  async getByEmail(email: string) {
     return await Users.findOne({
-      where: { email: body.email },
+      where: { email: email },
     });
   }
 

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import axios from "axios";
 import UsersService from "../services/userServise";
 import { checkPassword } from "../utils/checkPassword";
 import { createToken } from "../utils/createToken";
@@ -13,7 +14,7 @@ export const register = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "Data not null" });
   }
 
-  const user = await new UsersService().getByEmail(payload);
+  const user = await new UsersService().getByEmail(payload.email);
   if (user) return res.status(404).json({ message: "Email already is exist" });
 
   const encryptedPass = await encryptPassword(payload.password);
@@ -42,12 +43,56 @@ export const login = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "Email and Password is not null" });
   }
 
-  const user = await new UsersService().getByEmail(payload);
+  const user = await new UsersService().getByEmail(payload.email);
   if (!user) return res.status(404).json({ message: "Email is not exist" });
 
   const checkedPwd = await checkPassword(payload.password, user.password);
   if (!checkedPwd) {
     return res.status(400).json({ message: "Password is wrong" });
+  }
+
+  const accessToken = createToken(user, process.env.ACCESS_TOKEN_SECRET, "15s");
+  const refreshToken = createToken(
+    user,
+    process.env.REFRESH_TOKEN_SECRET,
+    "1d"
+  );
+
+  await new UsersService().updateToken(user.id, refreshToken);
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: true,
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    path: "/",
+    sameSite: "none",
+  });
+
+  return res.status(200).json({
+    message: "Login success",
+    accessToken,
+  });
+};
+
+export const googleAuth = async (req: Request, res: Response) => {
+  const token = req.headers.authorization || "";
+
+  const { data } = await axios.get(
+    "https://www.googleapis.com/oauth2/v2/userinfo",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  let user = await new UsersService().getByEmail(data.email);
+  if (!user) {
+    const body: any = {
+      name: data.name,
+      email: data.email,
+      role: "member",
+    };
+    user = await new UsersService().register(body);
   }
 
   const accessToken = createToken(user, process.env.ACCESS_TOKEN_SECRET, "15s");
@@ -79,7 +124,7 @@ export const loginSuperAdmin = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "Email and Password is not null" });
   }
 
-  const user = await new UsersService().getByEmail(payload);
+  const user = await new UsersService().getByEmail(payload.email);
   if (user?.role !== "superadmin") {
     return res.status(403).json({ message: "Permission denied" });
   }
@@ -120,7 +165,7 @@ export const createAdmin = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "Data not null" });
   }
 
-  const user = await new UsersService().getByEmail(payload);
+  const user = await new UsersService().getByEmail(payload.email);
   if (user) return res.status(404).json({ message: "Email already is exist" });
 
   const encryptedPass = await encryptPassword(payload.password);
