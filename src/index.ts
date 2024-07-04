@@ -10,7 +10,12 @@ const app = express();
 
 const rootRoute = require("./routes");
 
-app.use(cors({ credentials: true, origin: process.env.CLIENT_URL }));
+app.use(
+  cors({
+    credentials: true,
+    origin: [process.env.CLIENT_URL, "http://localhost:5173"],
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

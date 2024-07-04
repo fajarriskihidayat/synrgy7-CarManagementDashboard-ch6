@@ -39,7 +39,6 @@ export const getCarsById = async (req: Request, res: Response) => {
 export const createCar = async (req: Request, res: Response) => {
   const payload = req.body;
   const image = req.file as Express.Multer.File;
-  console.log({payload, image})
 
   if (!payload.size_id || !payload.name || !payload.rentPerDay) {
     return res.status(400).json({ message: "Data not null" });

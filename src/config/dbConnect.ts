@@ -11,6 +11,8 @@ const dbHost = process.env.DB_HOST;
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   host: dbHost,
   dialect: "postgres",
+  dialectModule: require("pg"),
+  dialectOptions: { ssl: { require: true } },
 });
 
 export default sequelize;
