@@ -11,9 +11,7 @@ export default class usersRepository {
   }
 
   async getByEmail(email: string) {
-    return await Users.findOne({
-      where: { email: email },
-    });
+    return await Users.findOne({ where: { email: email } });
   }
 
   async updateToken(id: number, payload: string | null) {

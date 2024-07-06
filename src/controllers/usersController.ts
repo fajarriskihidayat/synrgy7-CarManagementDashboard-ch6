@@ -80,7 +80,7 @@ export const googleAuth = async (req: Request, res: Response) => {
     "https://www.googleapis.com/oauth2/v2/userinfo",
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     }
   );
