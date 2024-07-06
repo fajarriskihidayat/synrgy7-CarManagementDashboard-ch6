@@ -179,6 +179,7 @@ const refreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         if (!refreshToken)
             return res.sendStatus(401);
         const user = yield new userServise_1.default().getUsers(refreshToken);
+        console.log({ user: user[0] });
         if (!user[0])
             return res.sendStatus(403);
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err) => {

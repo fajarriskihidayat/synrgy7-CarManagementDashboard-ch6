@@ -209,6 +209,7 @@ export const refreshToken = async (req: Request, res: Response) => {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) return res.sendStatus(401);
     const user = await new UsersService().getUsers(refreshToken);
+    console.log({ user: user[0] });
     if (!user[0]) return res.sendStatus(403);
     jwt.verify(
       refreshToken,

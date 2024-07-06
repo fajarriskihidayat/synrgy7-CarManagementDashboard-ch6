@@ -19,7 +19,7 @@ const isAdminOrSuperAdmin = (req, res, next) => __awaiter(void 0, void 0, void 0
         const bearerToken = req.headers.authorization;
         const token = bearerToken === null || bearerToken === void 0 ? void 0 : bearerToken.split("Bearer ")[1];
         const tokenPayload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        req.user = yield new userServise_1.default().getByEmail(tokenPayload);
+        req.user = yield new userServise_1.default().getByEmail(tokenPayload.email);
         if (req.user.role !== "admin" &&
             req.user.role !== "superadmin") {
             return res.status(401).json({ message: "Permission denied" });

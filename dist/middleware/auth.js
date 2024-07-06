@@ -19,7 +19,7 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
         const bearerToken = req.headers.authorization;
         const token = bearerToken === null || bearerToken === void 0 ? void 0 : bearerToken.split("Bearer ")[1];
         const tokenPayload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        req.user = yield new userServise_1.default().getByEmail(tokenPayload);
+        req.user = yield new userServise_1.default().getByEmail(tokenPayload.email);
         next();
     }
     catch (error) {

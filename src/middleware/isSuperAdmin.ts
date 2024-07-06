@@ -13,7 +13,7 @@ const isSuperAdmin = async (
     const token = bearerToken?.split("Bearer ")[1];
     const tokenPayload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-    (req as any).user = await new UsersService().getByEmail(tokenPayload);
+    (req as any).user = await new UsersService().getByEmail(tokenPayload.email);
 
     if ((req as any).user.role !== "superadmin") {
       return res.status(401).json({ message: "Permission denied" });

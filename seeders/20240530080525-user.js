@@ -23,7 +23,7 @@ module.exports = {
         name: "Admin",
         email: "admin@gmail.com",
         password: encryptedAdmin,
-        role: "superadmin",
+        role: "admin",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
